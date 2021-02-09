@@ -24,7 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        notify()->success('hello','hello');
         return view('home',compact('user'));
     }
 }
