@@ -46,15 +46,9 @@ Route::post('/settings/information',[SettingsController::class,'information'])->
 Route::get('/verification',[VerificationController::class,'index'])->name('verification.index');
 Route::post('/verification',[VerificationController::class,'update'])->name('verification.update');
 
+// Transactions Page
 
-
-
-
-
-
-
-
-
+Route::get('/send',[\App\Http\Controllers\Dashboard\SendController::class,'index'])->name('send.index');
 
 // Pages route e.g. [about,contact,etc]
 Route::get('/{slug}', PageController::class)->name('page');

@@ -116,4 +116,9 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Kyc::class);
     }
 
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
+
 }
