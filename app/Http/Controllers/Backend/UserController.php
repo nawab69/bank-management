@@ -44,6 +44,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+
+
         $user = User::create([
             'role_id' => $request->role,
             'first_name' => $request->first_name,
