@@ -24,11 +24,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 Auth::routes();
-// Socialite routes
-Route::group(['as' => 'login.', 'prefix' => 'login', 'namespace' => 'Auth'], function () {
-    Route::get('/{provider}', [LoginController::class, 'redirectToProvider'])->name('provider');
-    Route::get('/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('callback');
-});
+//// Socialite routes
+//Route::group(['as' => 'login.', 'prefix' => 'login', 'namespace' => 'Auth'], function () {
+//    Route::get('/{provider}', [LoginController::class, 'redirectToProvider'])->name('provider');
+//    Route::get('/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('callback');
+//});
 
 
 // Authenticated User
@@ -46,9 +46,14 @@ Route::post('/settings/information',[SettingsController::class,'information'])->
 Route::get('/verification',[VerificationController::class,'index'])->name('verification.index');
 Route::post('/verification',[VerificationController::class,'update'])->name('verification.update');
 
-// Transactions Page
+// Send
 
-Route::get('/send',[\App\Http\Controllers\Dashboard\SendController::class,'index'])->name('send.index');
+Route::middleware('auth')->prefix('send')->group( function(){
+    Route::get('/',[\App\Http\Controllers\Dashboard\SendController::class,'index'])->name('send.index');
+    Route::post('/check',[\App\Http\Controllers\Dashboard\SendController::class,'checkSend'])->name('send.check');
+    Route::post('/confirm',[\App\Http\Controllers\Dashboard\SendController::class,'confirmSend'])->name('send.confirm');
+});
+
 
 // Pages route e.g. [about,contact,etc]
 Route::get('/{slug}', PageController::class)->name('page');

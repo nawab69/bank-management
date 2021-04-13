@@ -15,11 +15,13 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('account_id');
             $table->string('trx_id');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->enum('type',['credit','debit']);
             $table->longText('description');
             $table->decimal('amount',32,2);
+            $table->decimal('fee',32,2);
+            $table->decimal('total',32,2);
             $table->enum('status',['pending','processing','completed','cancelled']);
             $table->string('comment')->nullable();
             $table->timestamps();

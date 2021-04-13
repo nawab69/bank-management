@@ -19,6 +19,22 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    @php
+                        $color = ['loan' => 'danger', 'investment' => 'info', 'current'=>'primary', 'savings' => 'secondary'];
+                    @endphp
+                    @foreach($accounts as $account)
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                        <x-balance
+                            icon="dollar-sign"
+                            value="{{'$ '.$account->account_balance}}"
+                            color="{{$color[$account->account_type]}}"
+                            title="{{$account->account_type}}"
+                        />
+                    </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>
